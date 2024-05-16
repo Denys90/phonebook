@@ -1,0 +1,1 @@
+{"version":3,"file":"static/js/918.47066ced.chunk.js","mappings":"yIAMA,UAJiB,WACf,OAAOA,EAAAA,EAAAA,KAACC,EAAAA,EAAW,GACrB,C","sources":["pages/UserPage.jsx"],"sourcesContent":["import UserAccount from 'components/UserAccount/UserAccount';\n\nconst UserPage = () => {\n  return <UserAccount />;\n};\n\nexport default UserPage;\n"],"names":["_jsx","UserAccount"],"sourceRoot":""}
