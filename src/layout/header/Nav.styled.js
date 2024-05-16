@@ -63,7 +63,9 @@ export const InformHome = styled.div`
   backdrop-filter: blur(5px);
   border-radius: 10px;
   padding: 20px;
-  margin: 120px auto;
+
+  margin: auto;
+  margin-top: 180px;
   max-width: 600px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
   h1 {
