@@ -1,7 +1,7 @@
 import { ButtonSubmit, FormRegist, Inputbox } from './FormRegistration.styled';
 import { useAuth } from './useAuth';
 
-const AuthForm = ({ showLoginForm }) => {
+const AuthForm = ({ showLoginForm, toggleModal }) => {
   const { handleSubmit } = useAuth({ showLoginForm });
 
   const formsInputs = [
@@ -26,8 +26,15 @@ const AuthForm = ({ showLoginForm }) => {
 
   return (
     <>
-      <FormRegist onSubmit={handleSubmit}>
-        <h2>Сreate or log in to your account.</h2>
+      <FormRegist
+        onSubmit={() => {
+          handleSubmit();
+          toggleModal();
+        }}
+      >
+        <h2>
+          {showLoginForm ? 'Login your account.' : 'Сreate your account.'}
+        </h2>
         <ul>
           {Array.isArray(formsInputs) &&
             formsInputs.map(({ label, type }) => (

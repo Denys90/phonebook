@@ -5,7 +5,9 @@ export const InfoBtn = styled.button`
   background: none;
   cursor: pointer;
   color: #fff;
-  font-size: 14px;
+  font-size: 16px;
+  text-decoration: underline;
+
   &:hover {
     color: rgb(218, 198, 0);
   }

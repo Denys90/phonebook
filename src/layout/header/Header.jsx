@@ -4,16 +4,33 @@ import { NavLink } from 'react-router-dom';
 import { GiExitDoor } from 'react-icons/gi';
 import { FaRegUserCircle } from 'react-icons/fa';
 
-import { useModalContext } from 'store/context';
+// import { useModalContext } from 'store/context';
 import { useUsers } from 'store/hooks';
 
-import { Modal } from 'components';
+import { AuthForm, Modal } from 'components';
 
 import { Button, Contact, Nav, Span, StyledLink, UserName } from './Nav.styled';
+import { useState } from 'react';
+import { ButtonSwitch } from 'components/modal/ModalStyle.styled';
 
 const Header = () => {
-  const { isAuthenticated, signOut } = useUsers();
-  const { isOpenModal, toggleModal } = useModalContext();
+  const [buttonSwitch, setButtonSwitch] = useState('Sign Up');
+  const [showLoginForm, setShowLoginForm] = useState(true);
+
+  const { isAuthenticated, signOut, user } = useUsers();
+
+  const [isOpen, setIsOpen] = useState(false);
+
+  const toggleModal = () => {
+    setIsOpen(!isOpen);
+    if (isOpen) {
+      setShowLoginForm(true);
+    }
+  };
+
+  const toggleForm = () => {
+    setShowLoginForm(!showLoginForm);
+  };
 
   return (
     <>
@@ -34,7 +51,7 @@ const Header = () => {
           <NavLink to="/userAccount">
             <UserName>
               <FaRegUserCircle />
-              {/* {user && user.name ? user.name : "Guest"} */}
+              {user && user.name ? user.name : 'Guest'}
               <span>Your account</span>
             </UserName>
           </NavLink>
@@ -51,7 +68,15 @@ const Header = () => {
         </Button>
       </Nav>
 
-      {isOpenModal && <Modal />}
+      {isOpen && (
+        <Modal onClose={toggleModal}>
+          <AuthForm showLoginForm={showLoginForm} toggleModal={toggleModal} />
+
+          <ButtonSwitch onClick={toggleForm}>
+            {buttonSwitch ? 'Sign Up' : 'Sign In'}
+          </ButtonSwitch>
+        </Modal>
+      )}
     </>
   );
 };

@@ -6,7 +6,7 @@ import { Provider } from 'react-redux';
 import { persistor, store } from './store/store';
 import { BrowserRouter } from 'react-router-dom';
 import { PersistGate } from 'redux-persist/integration/react';
-import { ModalProvider } from 'store/context';
+
 import { ThemeProvider } from '@emotion/react';
 import { theme } from 'styles/theme';
 
@@ -16,11 +16,9 @@ ReactDOM.createRoot(document.getElementById('root')).render(
       <Suspense fallback={<div>Loading....</div>}>
         <PersistGate loading="null" persistor={persistor}>
           <BrowserRouter basename="/phonebook">
-            <ModalProvider>
-              <ThemeProvider theme={theme}>
-                <App />
-              </ThemeProvider>
-            </ModalProvider>
+            <ThemeProvider theme={theme}>
+              <App />
+            </ThemeProvider>
           </BrowserRouter>
         </PersistGate>
       </Suspense>
