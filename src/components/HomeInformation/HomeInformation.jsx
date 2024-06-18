@@ -8,10 +8,11 @@ import { ButtonSwitch } from 'components/modal/ModalStyle.styled';
 
 const HomeInformation = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const [buttonSwitch, setButtonSwitch] = useState('Sign Up');
   const [showLoginForm, setShowLoginForm] = useState(true);
 
   const { isLoginedUser } = useUsers();
+
+  const buttonType = showLoginForm ? 'Sign Up' : 'Sign In';
 
   const toggleModal = () => {
     setIsOpen(!isOpen);
@@ -47,7 +48,7 @@ const HomeInformation = () => {
             </InfoBtn>
             or
             <InfoBtn type="button" onClick={handleLoginClick}>
-              log in
+              login
             </InfoBtn>
             to your account. Registration takes just a few minutes!
           </p>
@@ -58,9 +59,7 @@ const HomeInformation = () => {
         <Modal onClose={toggleModal}>
           <AuthForm showLoginForm={showLoginForm} toggleModal={toggleModal} />
 
-          <ButtonSwitch onClick={toggleForm}>
-            {buttonSwitch ? 'Sign Up' : 'Sign In'}
-          </ButtonSwitch>
+          <ButtonSwitch onClick={toggleForm}>{buttonType}</ButtonSwitch>
         </Modal>
       )}
     </>
