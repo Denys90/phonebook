@@ -4,7 +4,6 @@ import { NavLink } from 'react-router-dom';
 import { GiExitDoor } from 'react-icons/gi';
 import { FaRegUserCircle } from 'react-icons/fa';
 
-// import { useModalContext } from 'store/context';
 import { useUsers } from 'store/hooks';
 
 import { AuthForm, Modal } from 'components';
@@ -14,12 +13,11 @@ import { useState } from 'react';
 import { ButtonSwitch } from 'components/modal/ModalStyle.styled';
 
 const Header = () => {
-  const [buttonSwitch, setButtonSwitch] = useState('Sign Up');
   const [showLoginForm, setShowLoginForm] = useState(true);
-
   const { isAuthenticated, signOut, user } = useUsers();
-
   const [isOpen, setIsOpen] = useState(false);
+
+  const buttonType = showLoginForm ? 'Sign Up' : 'Sign In';
 
   const toggleModal = () => {
     setIsOpen(!isOpen);
@@ -72,9 +70,7 @@ const Header = () => {
         <Modal onClose={toggleModal}>
           <AuthForm showLoginForm={showLoginForm} toggleModal={toggleModal} />
 
-          <ButtonSwitch onClick={toggleForm}>
-            {buttonSwitch ? 'Sign Up' : 'Sign In'}
-          </ButtonSwitch>
+          <ButtonSwitch onClick={toggleForm}>{buttonType}</ButtonSwitch>
         </Modal>
       )}
     </>
