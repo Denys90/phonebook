@@ -17,6 +17,7 @@ export const signUpThunk = createAsyncThunk(
   async (credentials, { rejectWithValue }) => {
     try {
       const response = await axios.post('/users/signup', credentials);
+
       token.set(response.data.token);
       if (response.data.token) {
         alert('You have successfully registered!');

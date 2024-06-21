@@ -4,8 +4,7 @@ export const useAuth = ({ showLoginForm }) => {
   const { signUp, signIn } = useUsers();
 
   const handleSubmit = e => {
-    e.preventDefault();
-    const form = e.target;
+    // e.preventDefault();
 
     if (!showLoginForm) {
       const { name, email, password } = e.target.elements;
@@ -19,7 +18,7 @@ export const useAuth = ({ showLoginForm }) => {
       const { email, password } = e.target.elements;
       signIn({ email: email.value, password: password.value });
     }
-    form.reset();
+    e.target.reset();
   };
   return { handleSubmit };
 };

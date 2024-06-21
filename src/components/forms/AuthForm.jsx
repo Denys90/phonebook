@@ -27,8 +27,8 @@ const AuthForm = ({ showLoginForm, toggleModal }) => {
   return (
     <>
       <FormRegist
-        onSubmit={() => {
-          handleSubmit();
+        onSubmit={e => {
+          handleSubmit(e);
           toggleModal();
         }}
       >

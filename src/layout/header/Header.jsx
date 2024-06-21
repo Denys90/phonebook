@@ -50,7 +50,7 @@ const Header = () => {
             <UserName>
               <FaRegUserCircle />
               {user && user.name ? user.name : 'Guest'}
-              <span>Your account</span>
+              {/* <span>Your account</span> */}
             </UserName>
           </NavLink>
         )}
