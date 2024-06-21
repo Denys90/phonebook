@@ -12,6 +12,7 @@ import PublicRoute from 'guards/PublicRoute';
 
 import { globalStyles } from 'styles/GlobalStyles/Globalstyles.styled';
 import Spiner from './Spiner/Spiner';
+import { ToastContainer } from 'react-toastify';
 
 const Contacts = lazy(() => import('pages/Contacts'));
 const UserPage = lazy(() => import('pages/UserPage'));
@@ -26,6 +27,7 @@ export const App = () => {
   return (
     <>
       <Global styles={globalStyles} />
+      <ToastContainer />
       {isRefreshingUser ? (
         <Spiner />
       ) : (

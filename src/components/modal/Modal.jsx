@@ -1,42 +1,48 @@
+import { useEffect, useRef, useCallback } from 'react';
+import ReactDOM from 'react-dom';
+import { GrClose } from 'react-icons/gr';
 import {
   Popup,
   ModalContent,
   CloseButton,
   ModalWrapper,
 } from './ModalStyle.styled';
-import { useEffect, useRef } from 'react';
-import ReactDOM from 'react-dom';
-import { GrClose } from 'react-icons/gr';
 
 const Modal = ({ onClose, children }) => {
   const targetElement = document.getElementById('modalRoot');
   const backdrop = useRef();
 
-  const handleClickOutside = event => {
-    if (event.target === backdrop.current) {
-      onClose();
-    }
-    document.body.style.overflow = '';
-    document.body.style.position = '';
-    event.stopPropagation();
-  };
+  const handleClickOutside = useCallback(
+    event => {
+      if (event.target === backdrop.current) {
+        onClose();
+        document.body.style.overflow = '';
+        document.body.style.position = '';
+        event.stopPropagation();
+      }
+    },
+    [onClose]
+  );
 
-  const handleKeyDown = event => {
-    if (event.key === 'Escape') {
-      document.body.style.overflow = '';
-      document.body.style.position = '';
-      onClose();
-    }
-  };
+  const handleKeyDown = useCallback(
+    event => {
+      if (event.key === 'Escape') {
+        document.body.style.overflow = '';
+        document.body.style.position = '';
+        onClose();
+      }
+    },
+    [onClose]
+  );
 
   useEffect(() => {
-    const eventHandler = e => handleKeyDown(e);
-    document.addEventListener('keydown', eventHandler);
+    document.addEventListener('keydown', handleKeyDown);
     document.body.style.overflow = 'hidden';
+
     return () => {
-      document.removeEventListener('keydown', eventHandler);
+      document.removeEventListener('keydown', handleKeyDown);
     };
-  }, []);
+  }, [handleKeyDown]);
 
   return ReactDOM.createPortal(
     <Popup onClick={handleClickOutside} ref={backdrop}>

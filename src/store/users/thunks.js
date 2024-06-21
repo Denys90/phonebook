@@ -1,6 +1,9 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
 
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 axios.defaults.baseURL = 'https://connections-api.herokuapp.com';
 
 export const token = {
@@ -20,11 +23,11 @@ export const signUpThunk = createAsyncThunk(
 
       token.set(response.data.token);
       if (response.data.token) {
-        alert('You have successfully registered!');
+        toast.success('You have successfully registered!');
       }
       return response.data;
     } catch (error) {
-      console.log('Error signUpThunk', error.message);
+      toast.error('You entered incorrect data, try again!');
       return rejectWithValue(error.message);
     }
   }
@@ -39,11 +42,11 @@ export const loginThunk = createAsyncThunk(
       token.set(response.data.token);
 
       if (response.data.token) {
-        alert('You are successfully logged in!');
+        toast.success('You are successfully logged in!');
       }
       return response.data;
     } catch (error) {
-      alert('You have entered incorrect data, please try again!');
+      toast.error('You have entered incorrect data, please try again!');
       return rejectWithValue(error.message);
     }
   }
@@ -68,7 +71,6 @@ export const currentUserThunk = createAsyncThunk(
 
       return response.data;
     } catch (error) {
-      console.log('Error currentUserThunk', error.message);
       return rejectWithValue(error.message);
     }
   }
@@ -80,8 +82,8 @@ export const logoutThunk = createAsyncThunk(
   'users/logout',
   async (_, { rejectWithValue }) => {
     try {
-      token.unset();
       await axios.post('/users/logout');
+      token.unset();
     } catch (error) {
       return rejectWithValue(error.message);
     }

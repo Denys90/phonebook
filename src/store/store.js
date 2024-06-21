@@ -1,4 +1,4 @@
-import { combineReducers, configureStore } from '@reduxjs/toolkit';
+import { configureStore } from '@reduxjs/toolkit';
 
 import { usersReducer } from './users/usersSlice';
 import { contactsReducer } from './contacts/contactsSlice';
@@ -19,17 +19,17 @@ import { rootReducer } from 'components/root/slice';
 const persistConfig = {
   key: 'users',
   storage,
-  whitelist: ['token', 'profile'],
+  whitelist: ['token'],
 };
 
 const persistedReducer = persistReducer(persistConfig, usersReducer);
 
-const reducer = combineReducers({
+const reducer = {
   users: persistedReducer,
   contacts: contactsReducer,
   filter: filterReducer,
   root: rootReducer,
-});
+};
 export const store = configureStore({
   reducer,
   middleware: getDefaultMiddleware =>

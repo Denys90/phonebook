@@ -11,6 +11,9 @@ import { AuthForm, Modal } from 'components';
 import { Button, Contact, Nav, Span, StyledLink, UserName } from './Nav.styled';
 import { useState } from 'react';
 import { ButtonSwitch } from 'components/modal/ModalStyle.styled';
+import { toast } from 'react-toastify';
+
+import 'react-toastify/dist/ReactToastify.css';
 
 const Header = () => {
   const [showLoginForm, setShowLoginForm] = useState(true);
@@ -28,6 +31,11 @@ const Header = () => {
 
   const toggleForm = () => {
     setShowLoginForm(!showLoginForm);
+  };
+
+  const handleSignOut = () => {
+    signOut();
+    toast.info('Successfully logged out');
   };
 
   return (
@@ -50,7 +58,6 @@ const Header = () => {
             <UserName>
               <FaRegUserCircle />
               {user && user.name ? user.name : 'Guest'}
-              {/* <span>Your account</span> */}
             </UserName>
           </NavLink>
         )}
@@ -58,7 +65,7 @@ const Header = () => {
         <Button
           isAuthenticated={isAuthenticated ? isAuthenticated : null}
           type="button"
-          onClick={isAuthenticated ? () => signOut() : toggleModal}
+          onClick={isAuthenticated ? () => handleSignOut() : toggleModal}
         >
           {isAuthenticated ? <GiExitDoor /> : <FaUserAlt />}
 
