@@ -51,8 +51,8 @@ export const Button = styled.button(
       paddingLeft: 5,
     },
   },
-  ({ isAuthenticated }) => ({
-    marginLeft: !isAuthenticated ? 550 : 0,
+  ({ isAuth }) => ({
+    marginLeft: !isAuth ? 550 : 0,
   })
 );
 

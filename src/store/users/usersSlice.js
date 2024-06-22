@@ -10,10 +10,9 @@ import { getActions } from '../servises/getActions';
 
 const initialState = {
   token: null,
-  profile: { name: '', email: '' },
-  isLogined: false,
-  isRefreshing: false,
   hasError: null,
+  isRefreshing: false,
+  profile: { name: '', email: '' },
 };
 
 const usersSlice = createSlice({

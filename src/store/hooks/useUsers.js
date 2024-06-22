@@ -1,27 +1,30 @@
 import { useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import {
-  selectIsLoginedIn,
+  selectToken,
   selectProfile,
   selectHasError,
   selectIsRefreshing,
-  selectToken,
 } from 'store/users/selectors';
 import {
-  currentUserThunk,
   loginThunk,
   logoutThunk,
   signUpThunk,
+  currentUserThunk,
 } from '../users/thunks';
 
 export const useUsers = () => {
   const dispatch = useDispatch();
 
-  const isAuth = useSelector(selectToken);
   const user = useSelector(selectProfile);
-  const isAuthenticated = useSelector(selectIsLoginedIn);
-  const isRefreshingUser = useSelector(selectIsRefreshing);
+  const isAuth = useSelector(selectToken);
   const isAuthError = useSelector(selectHasError);
+  const isRefreshingUser = useSelector(selectIsRefreshing);
+
+  const fetchCurrentUser = useCallback(
+    () => dispatch(currentUserThunk()),
+    [dispatch]
+  );
 
   const signUp = useCallback(
     credentials => dispatch(signUpThunk(credentials)),
@@ -35,17 +38,11 @@ export const useUsers = () => {
 
   const signOut = useCallback(() => dispatch(logoutThunk()), [dispatch]);
 
-  const fetchCurrentUser = useCallback(
-    () => dispatch(currentUserThunk()),
-    [dispatch]
-  );
-
   return {
     user,
-    isAuthenticated,
-    isRefreshingUser,
-    isAuthError,
     isAuth,
+    isAuthError,
+    isRefreshingUser,
     signUp,
     signIn,
     signOut,

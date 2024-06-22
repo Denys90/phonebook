@@ -1,23 +1,23 @@
-import { FaUserAlt } from 'react-icons/fa';
-import { FaAddressBook } from 'react-icons/fa';
+import { useState } from 'react';
 import { NavLink } from 'react-router-dom';
-import { GiExitDoor } from 'react-icons/gi';
-import { FaRegUserCircle } from 'react-icons/fa';
 
 import { useUsers } from 'store/hooks';
-
 import { AuthForm, Modal } from 'components';
 
-import { Button, Contact, Nav, Span, StyledLink, UserName } from './Nav.styled';
-import { useState } from 'react';
-import { ButtonSwitch } from 'components/modal/ModalStyle.styled';
-import { toast } from 'react-toastify';
+import { FaUserAlt } from 'react-icons/fa';
+import { GiExitDoor } from 'react-icons/gi';
+import { FaAddressBook } from 'react-icons/fa';
+import { FaRegUserCircle } from 'react-icons/fa';
 
+import { Button, Contact, Nav, Span, StyledLink, UserName } from './Nav.styled';
+import { ButtonSwitch } from 'components/modal/ModalStyle.styled';
+
+import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 const Header = () => {
   const [showLoginForm, setShowLoginForm] = useState(true);
-  const { isAuthenticated, signOut, user } = useUsers();
+  const { signOut, user, isAuth } = useUsers();
   const [isOpen, setIsOpen] = useState(false);
 
   const buttonType = showLoginForm ? 'Sign Up' : 'Sign In';
@@ -46,14 +46,14 @@ const Header = () => {
           <Contact>Contacts</Contact>
         </Span>
 
-        {isAuthenticated && (
+        {isAuth && (
           <StyledLink to="/contacts">
             <FaAddressBook />
             <span> Contacts </span>
           </StyledLink>
         )}
 
-        {isAuthenticated && (
+        {isAuth && (
           <NavLink to="/userAccount">
             <UserName>
               <FaRegUserCircle />
@@ -63,13 +63,13 @@ const Header = () => {
         )}
 
         <Button
-          isAuthenticated={isAuthenticated ? isAuthenticated : null}
+          isAuth={isAuth ? isAuth : null}
           type="button"
-          onClick={isAuthenticated ? () => handleSignOut() : toggleModal}
+          onClick={isAuth ? () => handleSignOut() : toggleModal}
         >
-          {isAuthenticated ? <GiExitDoor /> : <FaUserAlt />}
+          {isAuth ? <GiExitDoor /> : <FaUserAlt />}
 
-          <span>{isAuthenticated ? 'Logout' : 'Login'}</span>
+          <span>{isAuth ? 'Logout' : 'Login'}</span>
         </Button>
       </Nav>
 
