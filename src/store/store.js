@@ -16,17 +16,26 @@ import {
 } from 'redux-persist';
 import { rootReducer } from 'components/root/slice';
 
-const persistConfig = {
+const usersPersistConfig = {
   key: 'users',
   storage,
-  whitelist: ['token'],
+  whitelist: ['token', 'profile'],
+};
+const contactsPersistConfig = {
+  key: 'contacts',
+  storage,
+  whitelist: ['contacts'],
 };
 
-const persistedReducer = persistReducer(persistConfig, usersReducer);
+const persistedUserReducer = persistReducer(usersPersistConfig, usersReducer);
+const persistedContactsReducer = persistReducer(
+  contactsPersistConfig,
+  contactsReducer
+);
 
 const reducer = {
-  users: persistedReducer,
-  contacts: contactsReducer,
+  users: persistedUserReducer,
+  contacts: persistedContactsReducer,
   filter: filterReducer,
   root: rootReducer,
 };

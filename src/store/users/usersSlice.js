@@ -31,7 +31,7 @@ const usersSlice = createSlice({
       })
 
       .addCase(currentUserThunk.fulfilled, (state, { payload }) => {
-        state.profile = payload.user;
+        state.profile = payload;
       })
 
       .addCase(logoutThunk.fulfilled, () => {

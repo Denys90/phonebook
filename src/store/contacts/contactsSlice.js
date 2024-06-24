@@ -20,23 +20,23 @@ const contactsSlice = createSlice({
   initialState,
   extraReducers: builder => {
     builder
-      .addCase(getAllContactsThunk.fulfilled, (state, action) => {
-        state.contacts = action.payload;
+      .addCase(getAllContactsThunk.fulfilled, (state, { payload }) => {
+        state.contacts = payload;
       })
-      .addCase(addContactThunk.fulfilled, (state, action) => {
-        state.contacts = [...state.contacts, action.payload];
+      .addCase(addContactThunk.fulfilled, (state, { payload }) => {
+        state.contacts = [...state.contacts, payload];
       })
-      .addCase(deleteContactThunk.fulfilled, (state, action) => {
+      .addCase(deleteContactThunk.fulfilled, (state, { payload }) => {
         state.contacts = state.contacts.filter(
-          contact => contact.id !== action.payload.id
+          contact => contact.id !== payload.id
         );
       })
-      .addCase(patchContactThunk.fulfilled, (state, action) => {
+      .addCase(patchContactThunk.fulfilled, (state, { payload }) => {
         const index = state.contacts.findIndex(
-          contact => contact.id === action.payload.id
+          contact => contact.id === payload.id
         );
         if (index !== -1) {
-          state.contacts[index] = action.payload;
+          state.contacts[index] = payload;
         }
       })
       .addMatcher(isAnyOf(...getActions('pending')), handlePending)
