@@ -3,9 +3,9 @@ import { Navigate, Route, Routes } from 'react-router-dom';
 import { Global } from '@emotion/react';
 
 import Layout from '../layout/layout';
+
 import Home from '../pages/Home';
 
-// import { useUsers } from 'store/hooks';
 import { useUsers } from '../store/hooks';
 
 import PrivateRoute from '../guards/PrivateRoute';
