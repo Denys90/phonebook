@@ -2,7 +2,7 @@ import { useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { selectContact, selectFilter } from '../store/contacts/selectors';
 
-import { setFilter } from '../store/contacts/filterSlice';
+import { setFilter } from '../store/contacts/filterSlice.js';
 import * as operations from '../store/contacts/thunks';
 
 export const useContacts = () => {

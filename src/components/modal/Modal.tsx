@@ -1,4 +1,4 @@
-import { useEffect, useRef, useCallback } from 'react';
+import { useEffect, useRef, useCallback, ReactNode } from 'react';
 import ReactDOM from 'react-dom';
 import { GrClose } from 'react-icons/gr';
 import {
@@ -8,12 +8,17 @@ import {
   ModalWrapper,
 } from './ModalStyle.styled';
 
-const Modal = ({ onClose, children }) => {
+interface ModalProps {
+  onClose: () => void;
+  children: ReactNode;
+}
+
+const Modal = ({ onClose, children }: ModalProps) => {
   const targetElement = document.getElementById('modalRoot');
-  const backdrop = useRef();
+  const backdrop = useRef<HTMLDivElement | null>(null);
 
   const handleClickOutside = useCallback(
-    event => {
+    (event: React.MouseEvent) => {
       if (event.target === backdrop.current) {
         onClose();
         document.body.style.overflow = '';
@@ -25,7 +30,7 @@ const Modal = ({ onClose, children }) => {
   );
 
   const handleKeyDown = useCallback(
-    event => {
+    (event: KeyboardEvent) => {
       if (event.key === 'Escape') {
         document.body.style.overflow = '';
         document.body.style.position = '';
@@ -41,8 +46,13 @@ const Modal = ({ onClose, children }) => {
 
     return () => {
       document.removeEventListener('keydown', handleKeyDown);
+      document.body.style.overflow = '';
     };
   }, [handleKeyDown]);
+
+  if (!targetElement) {
+    return null;
+  }
 
   return ReactDOM.createPortal(
     <Popup onClick={handleClickOutside} ref={backdrop}>

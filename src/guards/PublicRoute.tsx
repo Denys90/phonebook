@@ -1,7 +1,12 @@
 import { Navigate, useLocation } from 'react-router-dom';
-import { useUsers } from 'store/hooks';
+import { useUsers } from '../store/hooks';
+import { ReactNode } from 'react';
 
-const PublicRoute = ({ children }) => {
+interface PublicRouteProps {
+  children: ReactNode;
+}
+
+const PublicRoute = ({ children }: PublicRouteProps) => {
   const { isAuth } = useUsers();
 
   const { state: prevLocation } = useLocation();

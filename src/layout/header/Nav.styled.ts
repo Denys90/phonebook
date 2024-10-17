@@ -1,5 +1,5 @@
 import styled from '@emotion/styled';
-import { commonStylesBtn } from 'styles/CommonStyles';
+import { commonStylesBtn } from '../../styles/CommonStyles';
 import { NavLink } from 'react-router-dom';
 
 export const Nav = styled.nav`

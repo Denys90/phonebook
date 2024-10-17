@@ -1,5 +1,5 @@
 import styled from '@emotion/styled';
-import { CommonStylesContainer } from 'styles/CommonStyles';
+import { CommonStylesContainer } from '../../../styles/CommonStyles';
 
 const List = styled.ul`
   ${CommonStylesContainer}

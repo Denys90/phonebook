@@ -3,7 +3,7 @@ import {
   CommonStylesContainer,
   commonStylesBtn,
   commonStylesInput,
-} from 'styles/CommonStyles';
+} from '../../../styles/CommonStyles';
 
 const FormS = styled.form`
   ${CommonStylesContainer}

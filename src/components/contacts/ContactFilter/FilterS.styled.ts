@@ -1,5 +1,8 @@
 import styled from '@emotion/styled';
-import { CommonStylesContainer, commonStylesInput } from 'styles/CommonStyles';
+import {
+  CommonStylesContainer,
+  commonStylesInput,
+} from '../../../styles/CommonStyles';
 
 export const SearchContainer = styled.div`
   ${CommonStylesContainer}

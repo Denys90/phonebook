@@ -2,20 +2,21 @@ import React, { lazy, useEffect } from 'react';
 import { Navigate, Route, Routes } from 'react-router-dom';
 import { Global } from '@emotion/react';
 
-import Layout from 'layout/layout';
-import Home from 'pages/Home';
+import Layout from '../layout/layout';
+import Home from '../pages/Home';
 
-import { useUsers } from 'store/hooks';
+// import { useUsers } from 'store/hooks';
+import { useUsers } from '../store/hooks';
 
-import PrivateRoute from 'guards/PrivateRoute';
-import PublicRoute from 'guards/PublicRoute';
+import PrivateRoute from '../guards/PrivateRoute';
+import PublicRoute from '../guards/PublicRoute';
 
-import { globalStyles } from 'styles/GlobalStyles/Globalstyles.styled';
+import { globalStyles } from '../styles/GlobalStyles/Globalstyles.styled';
 import Spiner from './Spiner/Spiner';
 import { ToastContainer } from 'react-toastify';
 
-const Contacts = lazy(() => import('pages/Contacts'));
-const UserPage = lazy(() => import('pages/UserPage'));
+const Contacts = lazy(() => import('../pages/Contacts'));
+const UserPage = lazy(() => import('../pages/UserPage'));
 
 export const App = () => {
   const { isRefreshingUser, fetchCurrentUser } = useUsers();

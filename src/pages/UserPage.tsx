@@ -1,4 +1,4 @@
-import UserAccount from 'components/UserAccount/UserAccount';
+import UserAccount from '../components/UserAccount/UserAccount';
 
 const UserPage = () => {
   return <UserAccount />;

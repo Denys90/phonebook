@@ -1,4 +1,4 @@
-import HomeInformation from 'components/HomeInformation/HomeInformation';
+import HomeInformation from '../components/HomeInformation/HomeInformation';
 
 const Home = () => {
   return (
